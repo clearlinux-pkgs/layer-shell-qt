@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xEC94D18F7F05997E (jr@jriddell.org)
 #
 Name     : layer-shell-qt
-Version  : 5.22.1
-Release  : 3
-URL      : https://download.kde.org/stable/plasma/5.22.1/layer-shell-qt-5.22.1.tar.xz
-Source0  : https://download.kde.org/stable/plasma/5.22.1/layer-shell-qt-5.22.1.tar.xz
-Source1  : https://download.kde.org/stable/plasma/5.22.1/layer-shell-qt-5.22.1.tar.xz.sig
+Version  : 5.22.5
+Release  : 4
+URL      : https://download.kde.org/stable/plasma/5.22.5/layer-shell-qt-5.22.5.tar.xz
+Source0  : https://download.kde.org/stable/plasma/5.22.5/layer-shell-qt-5.22.5.tar.xz
+Source1  : https://download.kde.org/stable/plasma/5.22.5/layer-shell-qt-5.22.5.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-3-Clause CC0-1.0 LGPL-3.0 MIT
@@ -29,7 +29,8 @@ BuildRequires : qtbase-dev mesa-dev
 BuildRequires : qtbase-staticdev
 
 %description
-SPDX-License-Identifier: CC0-1.0
+# LayerShellQt
+This component is meant for applications to be able to easily use clients based on wlr-layer-shell.
 
 %package dev
 Summary: dev components for the layer-shell-qt package.
@@ -60,40 +61,40 @@ license components for the layer-shell-qt package.
 
 
 %prep
-%setup -q -n layer-shell-qt-5.22.1
-cd %{_builddir}/layer-shell-qt-5.22.1
+%setup -q -n layer-shell-qt-5.22.5
+cd %{_builddir}/layer-shell-qt-5.22.5
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1623807288
+export SOURCE_DATE_EPOCH=1630895594
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
-export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
 %cmake ..
 make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1623807288
+export SOURCE_DATE_EPOCH=1630895594
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/layer-shell-qt
-cp %{_builddir}/layer-shell-qt-5.22.1/LICENSES/BSD-3-Clause.txt %{buildroot}/usr/share/package-licenses/layer-shell-qt/f1946dab78e58c04c8c25ec6b074f5fc5c2830fe
-cp %{_builddir}/layer-shell-qt-5.22.1/LICENSES/CC0-1.0.txt %{buildroot}/usr/share/package-licenses/layer-shell-qt/82da472f6d00dc5f0a651f33ebb320aa9c7b08d0
-cp %{_builddir}/layer-shell-qt-5.22.1/LICENSES/LGPL-3.0-or-later.txt %{buildroot}/usr/share/package-licenses/layer-shell-qt/a8a12e6867d7ee39c21d9b11a984066099b6fb6b
-cp %{_builddir}/layer-shell-qt-5.22.1/LICENSES/MIT.txt %{buildroot}/usr/share/package-licenses/layer-shell-qt/adadb67a9875aeeac285309f1eab6e47d9ee08a7
-cp %{_builddir}/layer-shell-qt-5.22.1/README.md.license %{buildroot}/usr/share/package-licenses/layer-shell-qt/2b8a08519120d2d6798194c1ee82c17af8f3b45d
-cp %{_builddir}/layer-shell-qt-5.22.1/src/layer-shell.json.license %{buildroot}/usr/share/package-licenses/layer-shell-qt/2b8a08519120d2d6798194c1ee82c17af8f3b45d
-cp %{_builddir}/layer-shell-qt-5.22.1/src/wlr-layer-shell-unstable-v1.xml.license %{buildroot}/usr/share/package-licenses/layer-shell-qt/6653c5e493b925062b55673ef831a181dddb7dc7
+cp %{_builddir}/layer-shell-qt-5.22.5/LICENSES/BSD-3-Clause.txt %{buildroot}/usr/share/package-licenses/layer-shell-qt/f1946dab78e58c04c8c25ec6b074f5fc5c2830fe
+cp %{_builddir}/layer-shell-qt-5.22.5/LICENSES/CC0-1.0.txt %{buildroot}/usr/share/package-licenses/layer-shell-qt/82da472f6d00dc5f0a651f33ebb320aa9c7b08d0
+cp %{_builddir}/layer-shell-qt-5.22.5/LICENSES/LGPL-3.0-or-later.txt %{buildroot}/usr/share/package-licenses/layer-shell-qt/a8a12e6867d7ee39c21d9b11a984066099b6fb6b
+cp %{_builddir}/layer-shell-qt-5.22.5/LICENSES/MIT.txt %{buildroot}/usr/share/package-licenses/layer-shell-qt/adadb67a9875aeeac285309f1eab6e47d9ee08a7
+cp %{_builddir}/layer-shell-qt-5.22.5/README.md.license %{buildroot}/usr/share/package-licenses/layer-shell-qt/2b8a08519120d2d6798194c1ee82c17af8f3b45d
+cp %{_builddir}/layer-shell-qt-5.22.5/src/layer-shell.json.license %{buildroot}/usr/share/package-licenses/layer-shell-qt/2b8a08519120d2d6798194c1ee82c17af8f3b45d
+cp %{_builddir}/layer-shell-qt-5.22.5/src/wlr-layer-shell-unstable-v1.xml.license %{buildroot}/usr/share/package-licenses/layer-shell-qt/6653c5e493b925062b55673ef831a181dddb7dc7
 pushd clr-build
 %make_install
 popd
@@ -117,7 +118,7 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libLayerShellQtInterface.so.5
-/usr/lib64/libLayerShellQtInterface.so.5.22.1
+/usr/lib64/libLayerShellQtInterface.so.5.22.5
 /usr/lib64/qt5/plugins/wayland-shell-integration/liblayer-shell.so
 
 %files license

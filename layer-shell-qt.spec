@@ -4,7 +4,7 @@
 #
 Name     : layer-shell-qt
 Version  : 5.23.0
-Release  : 5
+Release  : 6
 URL      : https://download.kde.org/stable/plasma/5.23.0/layer-shell-qt-5.23.0.tar.xz
 Source0  : https://download.kde.org/stable/plasma/5.23.0/layer-shell-qt-5.23.0.tar.xz
 Summary  : No detailed summary available

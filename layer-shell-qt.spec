@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xD7574483BB57B18D (jr@jriddell.org)
 #
 Name     : layer-shell-qt
-Version  : 5.26.3
-Release  : 27
-URL      : https://download.kde.org/stable/plasma/5.26.3/layer-shell-qt-5.26.3.tar.xz
-Source0  : https://download.kde.org/stable/plasma/5.26.3/layer-shell-qt-5.26.3.tar.xz
-Source1  : https://download.kde.org/stable/plasma/5.26.3/layer-shell-qt-5.26.3.tar.xz.sig
+Version  : 5.26.4
+Release  : 28
+URL      : https://download.kde.org/stable/plasma/5.26.4/layer-shell-qt-5.26.4.tar.xz
+Source0  : https://download.kde.org/stable/plasma/5.26.4/layer-shell-qt-5.26.4.tar.xz
+Source1  : https://download.kde.org/stable/plasma/5.26.4/layer-shell-qt-5.26.4.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-3-Clause CC0-1.0 LGPL-3.0 MIT
@@ -28,8 +28,7 @@ BuildRequires : qtbase-dev
 BuildRequires : qtbase-staticdev
 
 %description
-# LayerShellQt
-This component is meant for applications to be able to easily use clients based on wlr-layer-shell.
+SPDX-License-Identifier: CC0-1.0
 
 %package dev
 Summary: dev components for the layer-shell-qt package.
@@ -60,15 +59,15 @@ license components for the layer-shell-qt package.
 
 
 %prep
-%setup -q -n layer-shell-qt-5.26.3
-cd %{_builddir}/layer-shell-qt-5.26.3
+%setup -q -n layer-shell-qt-5.26.4
+cd %{_builddir}/layer-shell-qt-5.26.4
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1667918991
+export SOURCE_DATE_EPOCH=1669813867
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -84,7 +83,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1667918991
+export SOURCE_DATE_EPOCH=1669813867
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/layer-shell-qt
 cp %{_builddir}/layer-shell-qt-%{version}/LICENSES/BSD-3-Clause.txt %{buildroot}/usr/share/package-licenses/layer-shell-qt/f1946dab78e58c04c8c25ec6b074f5fc5c2830fe || :
@@ -117,7 +116,7 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libLayerShellQtInterface.so.5
-/usr/lib64/libLayerShellQtInterface.so.5.26.3
+/usr/lib64/libLayerShellQtInterface.so.5.26.4
 /usr/lib64/qt5/plugins/wayland-shell-integration/liblayer-shell.so
 
 %files license

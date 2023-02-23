@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xD7574483BB57B18D (jr@jriddell.org)
 #
 Name     : layer-shell-qt
-Version  : 5.27.0
-Release  : 31
-URL      : https://download.kde.org/stable/plasma/5.27.0/layer-shell-qt-5.27.0.tar.xz
-Source0  : https://download.kde.org/stable/plasma/5.27.0/layer-shell-qt-5.27.0.tar.xz
-Source1  : https://download.kde.org/stable/plasma/5.27.0/layer-shell-qt-5.27.0.tar.xz.sig
+Version  : 5.27.1
+Release  : 32
+URL      : https://download.kde.org/stable/plasma/5.27.1/layer-shell-qt-5.27.1.tar.xz
+Source0  : https://download.kde.org/stable/plasma/5.27.1/layer-shell-qt-5.27.1.tar.xz
+Source1  : https://download.kde.org/stable/plasma/5.27.1/layer-shell-qt-5.27.1.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-3-Clause CC0-1.0 LGPL-3.0 MIT
@@ -62,15 +62,15 @@ license components for the layer-shell-qt package.
 
 
 %prep
-%setup -q -n layer-shell-qt-5.27.0
-cd %{_builddir}/layer-shell-qt-5.27.0
+%setup -q -n layer-shell-qt-5.27.1
+cd %{_builddir}/layer-shell-qt-5.27.1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1676861593
+export SOURCE_DATE_EPOCH=1677182492
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -86,7 +86,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1676861593
+export SOURCE_DATE_EPOCH=1677182492
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/layer-shell-qt
 cp %{_builddir}/layer-shell-qt-%{version}/LICENSES/BSD-3-Clause.txt %{buildroot}/usr/share/package-licenses/layer-shell-qt/f1946dab78e58c04c8c25ec6b074f5fc5c2830fe || :
@@ -119,7 +119,7 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libLayerShellQtInterface.so.5
-/usr/lib64/libLayerShellQtInterface.so.5.27.0
+/usr/lib64/libLayerShellQtInterface.so.5.27.1
 /usr/lib64/qt5/plugins/wayland-shell-integration/liblayer-shell.so
 
 %files license

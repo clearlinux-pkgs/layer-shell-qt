@@ -1,2 +1,2 @@
-5.27.4
-pkgconfig(wayland-protocols)
+5.27.5
+wayland-protocols-dev plasma-wayland-protocols-dev

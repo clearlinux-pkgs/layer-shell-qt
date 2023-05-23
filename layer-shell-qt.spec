@@ -6,11 +6,11 @@
 # Source0 file verified with key 0xD7574483BB57B18D (jr@jriddell.org)
 #
 Name     : layer-shell-qt
-Version  : 5.27.4
-Release  : 35
-URL      : https://download.kde.org/stable/plasma/5.27.4/layer-shell-qt-5.27.4.tar.xz
-Source0  : https://download.kde.org/stable/plasma/5.27.4/layer-shell-qt-5.27.4.tar.xz
-Source1  : https://download.kde.org/stable/plasma/5.27.4/layer-shell-qt-5.27.4.tar.xz.sig
+Version  : 5.27.5
+Release  : 36
+URL      : https://download.kde.org/stable/plasma/5.27.5/layer-shell-qt-5.27.5.tar.xz
+Source0  : https://download.kde.org/stable/plasma/5.27.5/layer-shell-qt-5.27.5.tar.xz
+Source1  : https://download.kde.org/stable/plasma/5.27.5/layer-shell-qt-5.27.5.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-3-Clause CC0-1.0 LGPL-3.0 MIT
@@ -23,10 +23,10 @@ BuildRequires : extra-cmake-modules qtwayland-dev
 BuildRequires : extra-cmake-modules wayland
 BuildRequires : extra-cmake-modules-data
 BuildRequires : pkg-config
-BuildRequires : pkgconfig(wayland-protocols)
 BuildRequires : pkgconfig(xkbcommon)
 BuildRequires : qtbase-dev
 BuildRequires : qtbase-staticdev
+BuildRequires : wayland-protocols-dev plasma-wayland-protocols-dev
 # Suppress stripping binaries
 %define __strip /bin/true
 %define debug_package %{nil}
@@ -63,31 +63,48 @@ license components for the layer-shell-qt package.
 
 
 %prep
-%setup -q -n layer-shell-qt-5.27.4
-cd %{_builddir}/layer-shell-qt-5.27.4
+%setup -q -n layer-shell-qt-5.27.5
+cd %{_builddir}/layer-shell-qt-5.27.5
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1680711386
+export SOURCE_DATE_EPOCH=1684866639
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+%cmake ..
+make  %{?_smp_mflags}
+popd
+mkdir -p clr-build-avx2
+pushd clr-build-avx2
+export GCC_IGNORE_WERROR=1
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -Wl,-z,x86-64-v3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd -march=x86-64-v3 "
+export FCFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd -march=x86-64-v3 "
+export FFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd -march=x86-64-v3 "
+export CXXFLAGS="$CXXFLAGS -O3 -Wl,-z,x86-64-v3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd -march=x86-64-v3 "
+export CFLAGS="$CFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
+export CXXFLAGS="$CXXFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
+export FFLAGS="$FFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
+export FCFLAGS="$FCFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
 %cmake ..
 make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1680711386
+export SOURCE_DATE_EPOCH=1684866639
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/layer-shell-qt
 cp %{_builddir}/layer-shell-qt-%{version}/LICENSES/BSD-3-Clause.txt %{buildroot}/usr/share/package-licenses/layer-shell-qt/f1946dab78e58c04c8c25ec6b074f5fc5c2830fe || :
@@ -97,15 +114,20 @@ cp %{_builddir}/layer-shell-qt-%{version}/LICENSES/MIT.txt %{buildroot}/usr/shar
 cp %{_builddir}/layer-shell-qt-%{version}/README.md.license %{buildroot}/usr/share/package-licenses/layer-shell-qt/2b8a08519120d2d6798194c1ee82c17af8f3b45d || :
 cp %{_builddir}/layer-shell-qt-%{version}/src/layer-shell.json.license %{buildroot}/usr/share/package-licenses/layer-shell-qt/2b8a08519120d2d6798194c1ee82c17af8f3b45d || :
 cp %{_builddir}/layer-shell-qt-%{version}/src/wlr-layer-shell-unstable-v1.xml.license %{buildroot}/usr/share/package-licenses/layer-shell-qt/6653c5e493b925062b55673ef831a181dddb7dc7 || :
+pushd clr-build-avx2
+%make_install_v3  || :
+popd
 pushd clr-build
 %make_install
 popd
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
 
 %files dev
 %defattr(-,root,root,-)
+/V3/usr/lib64/libLayerShellQtInterface.so
 /usr/include/LayerShellQt/Shell
 /usr/include/LayerShellQt/Window
 /usr/include/LayerShellQt/layershellqt_export.h
@@ -119,8 +141,11 @@ popd
 
 %files lib
 %defattr(-,root,root,-)
+/V3/usr/lib64/libLayerShellQtInterface.so.5
+/V3/usr/lib64/libLayerShellQtInterface.so.5.27.5
+/V3/usr/lib64/qt5/plugins/wayland-shell-integration/liblayer-shell.so
 /usr/lib64/libLayerShellQtInterface.so.5
-/usr/lib64/libLayerShellQtInterface.so.5.27.4
+/usr/lib64/libLayerShellQtInterface.so.5.27.5
 /usr/lib64/qt5/plugins/wayland-shell-integration/liblayer-shell.so
 
 %files license

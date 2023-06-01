@@ -7,7 +7,7 @@
 #
 Name     : layer-shell-qt
 Version  : 5.27.5
-Release  : 36
+Release  : 37
 URL      : https://download.kde.org/stable/plasma/5.27.5/layer-shell-qt-5.27.5.tar.xz
 Source0  : https://download.kde.org/stable/plasma/5.27.5/layer-shell-qt-5.27.5.tar.xz
 Source1  : https://download.kde.org/stable/plasma/5.27.5/layer-shell-qt-5.27.5.tar.xz.sig
@@ -71,7 +71,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1684866639
+export SOURCE_DATE_EPOCH=1685635013
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -104,7 +104,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1684866639
+export SOURCE_DATE_EPOCH=1685635013
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/layer-shell-qt
 cp %{_builddir}/layer-shell-qt-%{version}/LICENSES/BSD-3-Clause.txt %{buildroot}/usr/share/package-licenses/layer-shell-qt/f1946dab78e58c04c8c25ec6b074f5fc5c2830fe || :
@@ -127,7 +127,6 @@ popd
 
 %files dev
 %defattr(-,root,root,-)
-/V3/usr/lib64/libLayerShellQtInterface.so
 /usr/include/LayerShellQt/Shell
 /usr/include/LayerShellQt/Window
 /usr/include/LayerShellQt/layershellqt_export.h
@@ -141,7 +140,6 @@ popd
 
 %files lib
 %defattr(-,root,root,-)
-/V3/usr/lib64/libLayerShellQtInterface.so.5
 /V3/usr/lib64/libLayerShellQtInterface.so.5.27.5
 /V3/usr/lib64/qt5/plugins/wayland-shell-integration/liblayer-shell.so
 /usr/lib64/libLayerShellQtInterface.so.5

@@ -9,7 +9,7 @@
 #
 Name     : layer-shell-qt
 Version  : 6.1.4
-Release  : 56
+Release  : 57
 URL      : https://download.kde.org/stable/plasma/6.1.4/layer-shell-qt-6.1.4.tar.xz
 Source0  : https://download.kde.org/stable/plasma/6.1.4/layer-shell-qt-6.1.4.tar.xz
 Source1  : https://download.kde.org/stable/plasma/6.1.4/layer-shell-qt-6.1.4.tar.xz.sig
